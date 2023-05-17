@@ -26,12 +26,21 @@ public final class ContinueSum_1912 {
         }
         if (max < 0) answer = max;
 
-        for (int i = 0; i < size; i++) {
-            int sum = arr[i];
-            for (int j = i + 1; j < size; j++) {
-                sum += arr[j];
-                answer = Math.max(answer, sum);
-            }
+        // for (int i = 0; i < size; i++) {
+        //     int sum = arr[i];
+        //     for (int j = i + 1; j < size; j++) {
+        //         sum += arr[j];
+        //         answer = Math.max(answer, sum);
+        //     }
+        // }
+
+        int[] dp = new int[size];
+        dp[0] = arr[0];
+        for (int i = 1; i < size; i++) {
+            dp[i] = Math.max(dp[i-1] + arr[i], arr[i]);
+
+            System.out.println(dp[i]);
+            answer = Math.max(dp[i], answer);
         }
 
         // ========================================================================
