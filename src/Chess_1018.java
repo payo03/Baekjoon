@@ -101,6 +101,25 @@ public final class Chess_1018 {
             }
         }
 
+// 8 8
+// W W B W B W B B
+// W B W B W B W B
+// B W B W B W B W
+// W B W B W B W B
+// B W B W B W B W
+// W B W B W B W B
+// B W B W B W B W
+// B B W B W B W W
+
+// - W B W B W B -
+// W B W B W B W B
+// B W B W B W B W
+// W B W B W B W B
+// B W B W B W B W
+// W B W B W B W B
+// B W B W B W B W
+// - B W B W B W -
+
         return Math.min(count, backCount);
     }
 
