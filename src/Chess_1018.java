@@ -101,6 +101,7 @@ public final class Chess_1018 {
             }
         }
 
+// https://www.acmicpc.net/board/view/96079
 // 8 8
 // W W B W B W B B
 // W B W B W B W B
