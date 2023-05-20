@@ -62,66 +62,54 @@ public final class Chess_1018 {
                 count++;
             }
 
+            int cVar = currentColor;
             for (int j = col + 1; j < col + 8; j++) {
-                if (currentColor == map[i][j]) {
-                    if (currentColor == 'B')
-                        currentColor = 'W';
+                if (cVar == map[i][j]) {
+                    if (cVar == 'B')
+                        cVar = 'W';
                     else
-                        currentColor = 'B';
+                        cVar = 'B';
                     count++;
                 } else {
-                    currentColor = map[i][j];
+                    cVar = map[i][j];
                 }
             }
         }
 
-        int backCount = 0;
-        currentColor = map[row + 7][col + 7]; // 초기화
-        for (int i = row + 7; i > row - 1; i--) {
+        // 왼쪽 꼭지점 변경했을때의 Case
+        if (map[row][col] == 'B')
+            map[row][col] = 'W';
+        else
+            map[row][col] = 'B';
+
+        int reverseCount = 1;
+        currentColor = map[row][col]; // 초기화
+        for (int i = row; i < row + 8; i++) {
             char prevColor = currentColor; // 이전 색깔
-            currentColor = map[i][col + 7];
-            if (i < row && prevColor == currentColor) {
+            currentColor = map[i][col];
+            if (i > row && prevColor == currentColor) { // 각 row의 시작 Color 비교
                 if (currentColor == 'B')
                     currentColor = 'W';
                 else
                     currentColor = 'B';
-                backCount++;
+                reverseCount++;
             }
 
-            for (int j = col + 6; j > col - 1; j--) {
-                if (currentColor == map[i][j]) {
-                    if (currentColor == 'B')
-                        currentColor = 'W';
+            int cVar = currentColor;
+            for (int j = col + 1; j < col + 8; j++) {
+                if (cVar == map[i][j]) {
+                    if (cVar == 'B')
+                        cVar = 'W';
                     else
-                        currentColor = 'B';
-                    backCount++;
+                        cVar = 'B';
+                    reverseCount++;
                 } else {
-                    currentColor = map[i][j];
+                    cVar = map[i][j];
                 }
             }
         }
 
-// https://www.acmicpc.net/board/view/96079
-// 8 8
-// W W B W B W B B
-// W B W B W B W B
-// B W B W B W B W
-// W B W B W B W B
-// B W B W B W B W
-// W B W B W B W B
-// B W B W B W B W
-// B B W B W B W W
-
-// - W B W B W B -
-// W B W B W B W B
-// B W B W B W B W
-// W B W B W B W B
-// B W B W B W B W
-// W B W B W B W B
-// B W B W B W B W
-// - B W B W B W -
-
-        return Math.min(count, backCount);
+        return Math.min(count, reverseCount);
     }
 
 }
