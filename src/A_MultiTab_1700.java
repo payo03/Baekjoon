@@ -21,7 +21,7 @@ public final class A_MultiTab_1700 {
         int allCount = Integer.parseInt(st.nextToken());
 
         st = new StringTokenizer(br.readLine());
-        int[] order = new int[allCount];
+        int[] order = new int[allCount + 1];
         boolean[] use = new boolean[allCount + 1];
         for (int i = 0; i < allCount; i++) {
             order[i] = Integer.parseInt(st.nextToken());
@@ -37,7 +37,7 @@ public final class A_MultiTab_1700 {
                     maxCount++;
                 } else {
                     List<Integer> list = new ArrayList<>();
-                    for (int j = i; j < num; j++) {
+                    for (int j = i; j < num + i; j++) {
                         // 꽂혀있는 콘센트 list
                         if (use[order[j]] && !list.contains(order[j])) {
                             list.add(order[j]);
@@ -51,7 +51,7 @@ public final class A_MultiTab_1700 {
                                 break;
                             }
                         }
-                    } else {
+                    } else {    // 모든 콘센트 교체일 때
                         int remove = list.get(list.size() - 1);
                         use[remove] = false;
                     }
