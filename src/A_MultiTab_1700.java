@@ -37,14 +37,13 @@ public final class A_MultiTab_1700 {
                     maxCount++;
                 } else {
                     List<Integer> list = new ArrayList<>();
-                    int[] countList = new int[allCount + 1];
                     // 꽂혀있는 콘센트중 뒤에 꽂혀있는 콘센트 List
                     for (int j = i; j < order.length; j++) {
                         if (use[order[j]] && !list.contains(order[j])) {
                             list.add(order[j]);
                         }
                     }
-                    
+
                     if (list.size() != num) {
                         for (int j = 1; j < use.length; j++) {
                             // 콘센트 꽂혀있으면서, 뒤에 없는 콘센트를 제거
