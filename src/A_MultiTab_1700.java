@@ -24,11 +24,11 @@ public final class A_MultiTab_1700 {
         int[] order = new int[allCount + 1];
         boolean[] use = new boolean[allCount + 1];
         for (int i = 0; i < allCount; i++) {
-            order[i] = Integer.parseInt(st.nextToken());
+            order[i + 1] = Integer.parseInt(st.nextToken());
         }
 
         int maxCount = 0;
-        for (int i = 0; i < allCount; i++) {
+        for (int i = 1; i <= allCount; i++) {
             int item = order[i];
 
             if (!use[item]) {
@@ -37,24 +37,30 @@ public final class A_MultiTab_1700 {
                     maxCount++;
                 } else {
                     List<Integer> list = new ArrayList<>();
-                    for (int j = i; j < num + i; j++) {
-                        // 꽂혀있는 콘센트 list
+                    int[] countList = new int[allCount + 1];
+                    // 꽂혀있는 콘센트중 뒤에 꽂혀있는 콘센트 List
+                    for (int j = i; j < order.length; j++) {
                         if (use[order[j]] && !list.contains(order[j])) {
                             list.add(order[j]);
                         }
                     }
-
+                    
                     if (list.size() != num) {
-                        for (int j = 0; j < use.length; j++) {
-                            if (use[j] && !list.contains(j)) { // 그 콘센트를 제거.
+                        for (int j = 1; j < use.length; j++) {
+                            // 콘센트 꽂혀있으면서, 뒤에 없는 콘센트를 제거
+                            if (use[j] && !list.contains(j)) {
                                 use[j] = false;
+                                System.out.print("# IF\n" + j + " 콘센트 제거, ");
                                 break;
                             }
                         }
-                    } else {    // 모든 콘센트 교체일 때
+                    } else {
+                        // 꽂혀있는 콘센트중 뒤에 꽂힐 콘센트가, 꽂을수있는 갯수와 같으면 가장 마지막에 Insert된 콘센트 제거
                         int remove = list.get(list.size() - 1);
                         use[remove] = false;
+                        System.out.print("# ELSE\n" + remove + " 콘센트 제거, ");
                     }
+                    System.out.println(item + " 추가");
                     use[item] = true;
                     result++;
                 }
