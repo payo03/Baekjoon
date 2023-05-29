@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.*;
 
-public final class FillBox_1493 {
+public final class A_FillBox_1493 {
 
     public static void main(String[] args) throws Exception {
 
@@ -14,38 +14,42 @@ public final class FillBox_1493 {
 
         Object answer;
         // ========================================================================
-        int result = 0;
+        long result = 0;
         st = new StringTokenizer(br.readLine());
 
         int length = Integer.parseInt(st.nextToken());
         int width = Integer.parseInt(st.nextToken());
         int height = Integer.parseInt(st.nextToken());
 
-        int volumn = length * width * height;
-
         int size = Integer.parseInt(br.readLine());
-        int[][] box = new int[size][2];
+        long[] box = new long[size];
         for (int i = 0; i < size; i++) {
             st = new StringTokenizer(br.readLine());
 
             int type = Integer.parseInt(st.nextToken());
-            box[i][0] = (int) (Math.pow(2, type) * Math.pow(2, type) * Math.pow(2, type));
-            box[i][1] = Integer.parseInt(st.nextToken());
+            long count = Integer.parseInt(st.nextToken());
+
+            box[type] = count;
         }
 
-        for (int i = size - 1; i >= 0; i--) {
+        long prevFill = 0;
+        for (int type = size - 1; type >= 0; type--) {
 
-            int boxVolumn = box[i][0];
-            int boxCount = box[i][1];
+            int fillBox = (int) Math.pow(2, type);
 
-            int availableCount = volumn / boxVolumn;
-            if (boxCount < availableCount) {
-                volumn -= boxVolumn * boxCount;
-                result += boxCount;
-            } else {
-                volumn -= boxVolumn * availableCount;
-                result += availableCount;
-            }
+            // 대상 박스를 채울 박스(2^i)의 width, length, height로 나눈 후, 채워진 면을 뺐을때 필요한 갯수
+            long fillBoxCount = (long) (width / fillBox) * (length / fillBox) * (height / fillBox) - prevFill;
+            // 채울 박스갯수와 비교
+            long possiblebox = Math.min(box[type], fillBoxCount);
+
+            prevFill += possiblebox; // 이전에 채운 BoxCount
+            prevFill *= 8; // width, length, height이므로 prevFill * 8
+
+            result += possiblebox;
+        }
+
+        if ((prevFill / 8) != (long) length * width * height) {
+            result = -1;
         }
 
         answer = result;
