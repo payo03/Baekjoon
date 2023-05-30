@@ -6,8 +6,6 @@ import java.util.*;
 
 public final class Sticker_9465 {
 
-    static int[] dp;
-
     public static void main(String[] args) throws Exception {
 
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
