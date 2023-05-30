@@ -53,6 +53,11 @@ public final class Sticker_9465 {
             dp[1][j] = Math.max(dp[0][j - 1], dp[0][j - 2]) + sticker[1][j];
         }
 
+        System.out.print(Arrays.toString(dp[0]) + " ");
+        System.out.println();
+        System.out.print(Arrays.toString(dp[1]) + " ");
+        System.out.println();
+
         result = Math.max(dp[0][length - 1], dp[1][length - 1]);
         return String.valueOf(result);
     }
