@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.*;
 
-public final class OneZeroTile_1904 {
+public final class TwoMulNTiling_11726 {
 
     public static void main(String[] args) throws Exception {
 
@@ -15,7 +15,7 @@ public final class OneZeroTile_1904 {
         Object answer;
         // ========================================================================
         long result = 0;
-        long mod = 15746;
+        long mod = 10007;
         int num = Integer.parseInt(br.readLine());
 
         long[] dp = new long[num + 1];

@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.*;
 
-public final class OneZeroTile_1904 {
+public final class SquareNum_1699 {
 
     public static void main(String[] args) throws Exception {
 
@@ -15,27 +15,23 @@ public final class OneZeroTile_1904 {
         Object answer;
         // ========================================================================
         long result = 0;
-        long mod = 15746;
+
         int num = Integer.parseInt(br.readLine());
-
         long[] dp = new long[num + 1];
-
-        if(num == 1) {
-            bw.write("1");
-
-            bw.flush();
-            bw.close();
-            br.close();
-
-            return;
+        for(int i=1; i<=num; i++) {
+            dp[i] = i;
         }
 
-        dp[1] = 1;
-        dp[2] = 2;
-        for (int i = 3; i <= num; i++) {
-            dp[i] = (dp[i - 1] % mod) + (dp[i - 2] % mod);
+        for (int i = 1; i <= num; i++) {
+
+            for (int j = 1; j * j <= i; j++) {
+                if (dp[i] > dp[i - j * j] + 1) {
+                    dp[i] = dp[i - j * j] + 1;
+                }
+            }
         }
-        result = dp[num] % mod;
+
+        result = dp[num];
 
         answer = result;
         // ========================================================================
